@@ -30,8 +30,8 @@ router.use((req, res, next) => {
 router.use('/', routes);
 
 /** Error handling */
-router.use((_req, res, _next) => {
-    const error = new Error('not found');
+router.use((req, res, next) => {
+    const error = new Error(`⛔ Items not found`);
     return res.status(404).json({
         message: error.message
     });
@@ -40,4 +40,4 @@ router.use((_req, res, _next) => {
 /** Server */
 const httpServer = http.createServer(router);
 const PORT: any = process.env.PORT ?? 6060;
-httpServer.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
+httpServer.listen(PORT, () => console.log(`💫 The server is running on port ${PORT}`));
