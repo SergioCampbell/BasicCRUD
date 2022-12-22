@@ -9,7 +9,7 @@ interface Post {
 }
 
 //all posts
-const getAllposts = async (req: Request, res: Response, next: NextFunction) => {
+const getAllposts = async (_req: Request, res: Response, _next: NextFunction) => {
     let result: AxiosResponse = await axios.get(`https://jsonplaceholder.typicode.com/posts`)
     let posts: [Post] = result.data
 
@@ -19,7 +19,7 @@ const getAllposts = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 //single post
-const getPost = async (req: Request, res: Response, next: NextFunction) => {
+const getPost = async (req: Request, res: Response, _next: NextFunction) => {
     let id: string = req.params.id
     let result: AxiosResponse = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
     let post: Post = result.data
@@ -30,7 +30,7 @@ const getPost = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 //udating post
-const updatePost = async (req: Request, res: Response, next: NextFunction) => {
+const updatePost = async (req: Request, res: Response, _next: NextFunction) => {
     let id: string = req.params.id
     let title: string = req.params.title ?? null
     let body: string = req.params.body ?? null
@@ -46,17 +46,17 @@ const updatePost = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 //deleting post
-const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+const deletePost = async (req: Request, res: Response, _next: NextFunction) => {
     let id: string = req.params.id
-    let response = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    let result = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
 
     return res.status(200).json({
-        message: 'Post deleted successfully'
+        message: 'Post deleted successfully' || result
     })
 }
 
 //adding new post
-const addPost = async (req:Request, res: Response, next: NextFunction) => {
+const addPost = async (req:Request, res: Response, _next: NextFunction) => {
     let title: string = req.body.title
     let body: string = req.body.body
 
